@@ -20,3 +20,16 @@ label.error {
   font-size: 20px;
   font-weight: bold;
 }
+.set{
+  font-size: 12px;
+  padding-left: 13px;
+  color: rgb(86, 84, 84);
+  word-spacing: 5px;
+
+}
+
+#phone::-webkit-outer-spin-button,
+#phone::-webkit-inner-spin-button {
+  -webkit-appearance: none;
+  margin: 0;
+} 

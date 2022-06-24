@@ -5,6 +5,7 @@ $(document).ready(function () {
       name: {
         required: true,
         minlength: 3,
+        maxlength:30,
         name_val: true
       },
       age : {
@@ -19,7 +20,9 @@ $(document).ready(function () {
       },
       phone: {
         required: true,
-        phone_val:true
+        phone_val:true,
+        minlength:10,
+        maxlength:10
       },
       gender: {
         required: true
@@ -70,7 +73,7 @@ $(document).ready(function () {
   })
   
   $.validator.addMethod('name_val',function(value){
-    return /^[a-zA-Z ]*$/.test(value);
+    return /^[a-zA-Z]+(\s{0,1}[a-zA-Z]\s{0,1})*$/.test(value);
   }, "Please enter a valid name");
 
   $.validator.addMethod('age_val',function(value){
@@ -168,6 +171,18 @@ $(document).on('click', '.day input[type=checkbox]', function (event) {
  
 $("#myform").submit(function (event) {
   event.preventDefault();
+  localStorage.clear();
+  if($('.day input[type=checkbox]').is(':checked')){
+    var flag=true;
+  }
+  else{
+    var flag=false;
+  }
+  for (let i = 1; i < 8; i++) {
+    if ($('#pickupTime' + i).parent().parent().children('.day').children().children().is(':checked') && $('#pickupTime' + i).val() == ' ') {
+      flag = false;
+    }
+  }
   let name = $('#name').val();
   let age = $('#age').val();
   let email = $("#email").val();
@@ -182,19 +197,20 @@ $("#myform").submit(function (event) {
   let fri = $('.fri1').val();
   let sat = $('.sat1').val();
 
+
+  
   if ($('#name').valid() &&
     $('#age').valid() &&
     $("#email").valid() &&
-    $("#phone").valid() && sun != " " ||
-    mon != " " || tue != " " || wed != " " || thr != " " || fri != " " || sat != " "
+    $("#phone").valid() &&
+    $("#nextday2").valid() &&
+    flag
+    //  sun != " " ||
+    // mon != " " || tue != " " || wed != " " || thr != " " || fri != " " || sat != " "
     && $("input[name='gender']:checked") != undefined) {
     // if the days checkbox is checked and the value of pickupTime is null then  flag will be set at false
-    var flag = true;
-    for (let i = 1; i < 8; i++) {
-      if ($('#pickupTime' + i).parent().parent().children('.day').children().children().is(':checked') && $('#pickupTime' + i).val() == ' ') {
-        flag = false;
-      }
-    }
+    // var flag = true;
+    
     // console.log($('#pickupTime1').parent().parent().children('.day').children().children().is(':checked') && $('#pickupTime1').val() == " ");
     // console.log($('#pickupTime2').parent().parent().children('.day').children().children().is(':checked') && $('#pickupTime2').val() == " ");
     // console.log($('#pickupTime3').parent().parent().children('.day').children().children().is(':checked') && $('#pickupTime3').val() == " ");

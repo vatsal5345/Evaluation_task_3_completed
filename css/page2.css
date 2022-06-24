@@ -1,6 +1,7 @@
 table{
   table-layout: fixed;
   width: 100%;
+  
   /* border: 1px solid; */
 }
 
@@ -16,4 +17,22 @@ td,th{
 td{
   border :1px solid;
   text-align: center;
+}
+.email{
+  width: 160px;
+}
+.name{
+  width: 160px;
+}
+.age{
+  width: 40px;
+}
+.phn{
+  width: 120px;
+}
+.gender{
+  width: 60px;
+}
+.days{
+  width: 100px;
 }
